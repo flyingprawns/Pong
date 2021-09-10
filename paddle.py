@@ -12,3 +12,11 @@ class Paddle(Turtle):
         self.penup()
         self.speed("fastest")
         self.goto(paddle_position)
+
+    def up(self):
+        self.sety(self.ycor()+100)
+        self.getscreen().update()
+
+    def down(self):
+        self.sety(self.ycor()-100)
+        self.getscreen().update()
