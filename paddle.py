@@ -15,8 +15,6 @@ class Paddle(Turtle):
 
     def up(self):
         self.sety(self.ycor()+75)
-        self.getscreen().update()
 
     def down(self):
         self.sety(self.ycor()-75)
-        self.getscreen().update()

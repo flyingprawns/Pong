@@ -23,5 +23,10 @@ screen.onkey(key="s", fun=paddle_left.down)
 screen.onkey(key="Up", fun=paddle_right.up)
 screen.onkey(key="Down", fun=paddle_right.down)
 
+# Start game
+game_is_on = True
+while game_is_on:
+    screen.update()
+
 # Exit on click
 screen.exitonclick()
