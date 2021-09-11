@@ -33,15 +33,21 @@ screen.onkey(key="Down", fun=right_paddle.down)
 game_is_on = True
 while game_is_on:
     ball.move()
-    # Detect collisions
-    if ball.ycor() > 270 or ball.ycor() < -270:
+
+    # Detect wall collisions
+    wall_collision = ball.ycor() > 270 or ball.ycor() < -270
+    if wall_collision:
         ball.wall_bounce()
-    # Detect paddle collision
-    if (ball.distance(right_paddle) < 50 and 320 < ball.xcor() < 380) or \
-            (ball.distance(left_paddle) < 50 and -320 > ball.xcor() > -380):
+
+    # Detect paddle collisions
+    paddle_collision = (ball.distance(right_paddle) < 50 and 320 < ball.xcor() < 380) or \
+            (ball.distance(left_paddle) < 50 and -320 > ball.xcor() > -380)
+    if paddle_collision:
         ball.paddle_bounce()
+
     # Detect out of bounds
-    if ball.xcor() > 400 or ball.xcor() < -400:
+    out_of_bounds = ball.xcor() > 400 or ball.xcor() < -400
+    if out_of_bounds:
         # Update score
         if ball.get_side() == "left":
             score.r_score += 1
@@ -53,6 +59,7 @@ while game_is_on:
         ball.reset_ball()
         left_paddle.goto(PADDLE_LEFT_POSITION)
         right_paddle.goto(PADDLE_RIGHT_POSITION)
+
     # Update screen and wait 0.5 seconds
     screen.update()
     time.sleep(0.1)
