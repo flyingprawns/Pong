@@ -1,5 +1,6 @@
 from turtle import Screen
 from paddle import Paddle
+from ball import Ball
 
 PADDLE_LEFT_POSITION = (-355, 0)
 PADDLE_RIGHT_POSITION = (350, 0)
@@ -11,9 +12,10 @@ screen.bgcolor("black")
 screen.title("Pong!")
 screen.tracer(0)
 
-# Create two paddles
+# Create paddles and ball
 paddle_left = Paddle(PADDLE_LEFT_POSITION)
 paddle_right = Paddle(PADDLE_RIGHT_POSITION)
+ball = Ball()
 screen.update()
 
 # Listen for user input
