@@ -24,16 +24,17 @@ class Ball(Turtle):
     def wall_bounce(self):
         self.y_move *= -1
 
-    def paddle_bounce(self):
-        # Calculate which side the ball is on
+    def get_side(self):
         if self.xcor() > 0:
-            current_side = "right"
+            return "right"
         else:
-            current_side = "left"
+            return "left"
+
+    def paddle_bounce(self):
         # Prevent multiple bounces on one side
-        if current_side != self.last_bounce:
+        if self.get_side() != self.last_bounce:
             self.x_move *= -1
-            self.last_bounce = current_side
+            self.last_bounce = self.get_side()
 
     def reset_ball(self):
         self.goto(0, 0)

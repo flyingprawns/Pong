@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import ScoreBoard
 import time
 
 PADDLE_LEFT_POSITION = (-355, 0)
@@ -14,10 +15,11 @@ screen.bgcolor("black")
 screen.title("Pong!")
 screen.tracer(0)
 
-# Create paddles and ball
+# Create paddles, ball, scoreboard
 left_paddle = Paddle(PADDLE_LEFT_POSITION)
 right_paddle = Paddle(PADDLE_RIGHT_POSITION)
 ball = Ball(BALL_POSITION)
+score = ScoreBoard()
 screen.update()
 
 # Listen for user input
@@ -30,7 +32,6 @@ screen.onkey(key="Down", fun=right_paddle.down)
 # Start game
 game_is_on = True
 while game_is_on:
-    # Move ball
     ball.move()
     # Detect collisions
     if ball.ycor() > 270 or ball.ycor() < -270:
@@ -41,6 +42,13 @@ while game_is_on:
         ball.paddle_bounce()
     # Detect out of bounds
     if ball.xcor() > 400 or ball.xcor() < -400:
+        # Update score
+        if ball.get_side() == "left":
+            score.r_score += 1
+        elif ball.get_side() == "right":
+            score.l_score += 1
+        score.display_score()
+        # Reset game state
         time.sleep(1)
         ball.reset_ball()
         left_paddle.goto(PADDLE_LEFT_POSITION)
