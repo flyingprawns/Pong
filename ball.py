@@ -11,6 +11,7 @@ class Ball(Turtle):
         self.speed("fastest")
         self.goto(position)
         # x_move, y_move: how much the ball moves per frame
+        self.move_speed = 0.1
         self.x_move = 20
         self.y_move = 20
         # Track the last paddle to bounce the ball. This prevents "double bounces".
@@ -35,8 +36,10 @@ class Ball(Turtle):
         if self.get_side() != self.last_bounce:
             self.x_move *= -1
             self.last_bounce = self.get_side()
+            self.move_speed *= 0.81
 
     def reset_ball(self):
         self.goto(0, 0)
+        self.move_speed = 0.1
         self.x_move *= -1
         self.last_bounce = "none"
