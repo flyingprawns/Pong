@@ -14,9 +14,11 @@ class Paddle(Turtle):
         self.goto(paddle_position)
 
     def up(self):
-        self.sety(self.ycor()+75)
-        self.getscreen().update()
+        if self.ycor() < 300:
+            self.sety(self.ycor()+75)
+            self.getscreen().update()
 
     def down(self):
-        self.sety(self.ycor()-75)
-        self.getscreen().update()
+        if self.ycor() > -300:
+            self.sety(self.ycor()-75)
+            self.getscreen().update()

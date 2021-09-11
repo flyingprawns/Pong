@@ -4,8 +4,8 @@ from ball import Ball
 import time
 
 PADDLE_LEFT_POSITION = (-355, 0)
-PADDLE_RIGHT_POSITION = (350, 0)
-BALL_POSITION = (-200, 0)
+PADDLE_RIGHT_POSITION = (355, 0)
+BALL_POSITION = (0, 0)
 
 # Create game screen
 screen = Screen()
@@ -33,15 +33,21 @@ while game_is_on:
     # Move ball
     ball.move()
     # Detect collisions
-    if ball.ycor() > 280 or ball.ycor() < -280:
+    if ball.ycor() > 270 or ball.ycor() < -270:
         ball.wall_bounce()
     # Detect paddle collision
-    if (ball.distance(right_paddle) < 80 and ball.xcor() > 320) or \
-            (ball.distance(left_paddle) < 80 and ball.xcor() < -310):
+    if (ball.distance(right_paddle) < 50 and 320 < ball.xcor() < 380) or \
+            (ball.distance(left_paddle) < 50 and -320 > ball.xcor() > -380):
         ball.paddle_bounce()
+    # Detect out of bounds
+    if ball.xcor() > 400 or ball.xcor() < -400:
+        time.sleep(1)
+        ball.reset_ball()
+        left_paddle.goto(PADDLE_LEFT_POSITION)
+        right_paddle.goto(PADDLE_RIGHT_POSITION)
     # Update screen and wait 0.5 seconds
     screen.update()
-    time.sleep(0.5)
+    time.sleep(0.1)
 
 # Exit on click
 screen.exitonclick()
