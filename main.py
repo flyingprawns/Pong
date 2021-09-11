@@ -1,6 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+import time
 
 PADDLE_LEFT_POSITION = (-355, 0)
 PADDLE_RIGHT_POSITION = (350, 0)
@@ -28,7 +29,9 @@ screen.onkey(key="Down", fun=paddle_right.down)
 # Start game
 game_is_on = True
 while game_is_on:
+    ball.move()
     screen.update()
+    time.sleep(0.5)
 
 # Exit on click
 screen.exitonclick()
